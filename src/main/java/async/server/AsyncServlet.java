@@ -24,8 +24,6 @@ public class AsyncServlet extends HttpServlet {
             throws ServletException, IOException {
         final AsyncContext ac = request.startAsync(request, response);
         ac.start(new Runnable() {
-
-            @Override
             public void run() {
                 try {
                     final PrintWriter responseWriter = new PrintWriter(response.getOutputStream());

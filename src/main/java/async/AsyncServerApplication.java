@@ -1,9 +1,9 @@
 package async;
 
-import async.server.AsyncServlet;
 import io.dropwizard.Application;
-import io.dropwizard.jetty.MutableServletContextHandler;
 import io.dropwizard.setup.Environment;
+import async.rest.AsyncResource;
+import async.server.AsyncServlet;
 
 /**
  * @author Scott Kidder
@@ -24,8 +24,12 @@ public class AsyncServerApplication extends Application<AsyncServerConfiguration
      */
     @Override
     public void run(AsyncServerConfiguration config, Environment env) throws Exception {
-        final MutableServletContextHandler app = env.getApplicationContext();
-        app.addServlet(AsyncServlet.class, "/async");
+        // plain servlet
+        env.getApplicationContext().addServlet(AsyncServlet.class, "/async");
+
+        // jersey endpoint
+        final AsyncResource resource = new AsyncResource();
+        env.jersey().register(resource);
     }
 
 }

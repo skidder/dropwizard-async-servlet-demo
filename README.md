@@ -11,7 +11,7 @@ $ mvn clean package
 $ java -jar target/dropwizard-async-servlet-demo.jar server
 ```
 
-## Issue request with Curl
+## Issue request to Plain Servlet with Curl
 ```
 $ curl http://localhost:8080/async
 ```
@@ -45,5 +45,31 @@ $ curl -vvv http://localhost:8080/async
 10
 * Connection #0 to host localhost left intact
 * Closing connection #0
+```
+
+## Issue request to Jersey resource with Curl
+```
+$ curl http://localhost:8080/rest
+```
+
+You should see output like:
+```
+$ curl -vvv http://localhost:8080/rest
+* About to connect() to localhost port 8080 (#0)
+*   Trying ::1...
+* connected
+* Connected to localhost (::1) port 8080 (#0)
+> GET /rest HTTP/1.1
+> User-Agent: curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8| zlib/1.2.5
+> Host: localhost:8080
+> Accept: */*
+>
+< HTTP/1.1 200 OK
+< Date: Fri, 06 Feb 2015 20:08:32 GMT
+< Content-Type: text/plain
+< Content-Length: 12
+<
+* Connection #0 to host localhost left intact
+Hello World!* Closing connection #0
 ```
 
